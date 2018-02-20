@@ -4,24 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="com.edgarhandev.shippossqueakytoysounds.shippossqueakytoysounds.MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
         android:layout_centerHorizontal="true"
-        android:text="Touch the Bird"
-        android:id="@+id/textView" />
+        android:fontFamily="casual"
+        android:text="Shippo's Toys"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/robin_toy_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/shippo_beg"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/robin_toy_button" />
+
+    <ImageView
+        android:id="@+id/bone_toy_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        app:srcCompat="@drawable/robin_toy"
-        />
+        app:srcCompat="@drawable/bone_toy_button" />
+
+    <ImageView
+        android:id="@+id/squeaker_toy_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/shippo_beg"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/squeaker_button" />
 
     <ImageView
         android:layout_width="100dp"

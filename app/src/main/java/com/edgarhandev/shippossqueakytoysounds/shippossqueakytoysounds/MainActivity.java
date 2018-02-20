@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import android.media.MediaPlayer;
 import android.util.DisplayMetrics;
@@ -17,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     final String YOUR_ADMOB_APP_ID = "ca-app-pub-5445092696369420~5862136706";
     Button stopButton;
-    ImageView robinToyImg, shippoBegImg;
+    ImageView robinToyImg, shippoBegImg, boneToyImg, squeakerToyImg;
     MediaPlayer mp;
     Context context = this;
     DisplayMetrics displayMetrics = new DisplayMetrics();
     int width, height, shippoImgSize;
     Random random;
     Thread shippoThread;
+    private AdView mAdView;
 
 
     @Override
@@ -39,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         // initialize the ads
         MobileAds.initialize(this, YOUR_ADMOB_APP_ID);
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         mp = MediaPlayer.create(this, R.raw.bird_whistle);
 
@@ -73,10 +80,46 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     if (mp.isPlaying()) {
                         mp.stop();
-                        mp.release();
-                        mp = MediaPlayer.create(context, R.raw.bird_whistle);
                     }
                     showShippo();
+                    mp.release();
+                    mp = MediaPlayer.create(context, R.raw.bird_whistle);
+                    mp.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        boneToyImg = findViewById(R.id.bone_toy_img);
+        boneToyImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (mp.isPlaying()) {
+                        mp.stop();
+                    }
+                    showShippo();
+                    mp.release();
+                    mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_01);
+                    mp.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        squeakerToyImg = findViewById(R.id.squeaker_toy_img);
+        squeakerToyImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (mp.isPlaying()) {
+                        mp.stop();
+                    }
+                    showShippo();
+                    mp.release();
+                    mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_02);
                     mp.start();
                 } catch (Exception e) {
                     e.printStackTrace();
