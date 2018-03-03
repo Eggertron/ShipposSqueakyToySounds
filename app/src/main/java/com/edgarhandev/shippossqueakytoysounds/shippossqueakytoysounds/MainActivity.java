@@ -108,9 +108,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopPlayer();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopPlayer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopPlayer();
+    }
+
     /*
-    Function that makes shippo images pop up
-     */
+                Function that makes shippo images pop up
+                 */
     void showShippo() {
 
         if (shippoThread == null)
