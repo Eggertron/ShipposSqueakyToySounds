@@ -61,15 +61,7 @@ public class MainActivity extends AppCompatActivity {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if (mp.isPlaying()) {
-                        mp.stop();
-                        mp.release();
-                        mp = MediaPlayer.create(context, R.raw.bird_whistle);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                stopPlayer();
             }
         });
 
@@ -77,17 +69,9 @@ public class MainActivity extends AppCompatActivity {
         robinToyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if (mp.isPlaying()) {
-                        mp.stop();
-                    }
-                    showShippo();
-                    mp.release();
-                    mp = MediaPlayer.create(context, R.raw.bird_whistle);
-                    mp.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                stopPlayer();
+                showShippo();
+                mp = MediaPlayer.create(context, R.raw.bird_whistle);
             }
         });
 
@@ -95,17 +79,9 @@ public class MainActivity extends AppCompatActivity {
         boneToyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if (mp.isPlaying()) {
-                        mp.stop();
-                    }
-                    showShippo();
-                    mp.release();
-                    mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_01);
-                    mp.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                stopPlayer();
+                showShippo();
+                mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_01);
             }
         });
 
@@ -113,32 +89,35 @@ public class MainActivity extends AppCompatActivity {
         squeakerToyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if (mp.isPlaying()) {
-                        mp.stop();
-                    }
-                    showShippo();
-                    mp.release();
-                    mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_02);
-                    mp.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                stopPlayer();
+                showShippo();
+                mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_02);
             }
         });
+    }
+
+    void stopPlayer() {
+        try {
+            if (mp.isPlaying()) {
+                mp.stop();
+            }
+            mp.release();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*
     Function that makes shippo images pop up
      */
     void showShippo() {
-        //shippoBegImg.setX(random.nextInt(width - shippoImgSize));
-        shippoBegImg.setY(random.nextInt(height - shippoImgSize));
 
         if (shippoThread == null)
             shippoThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    //shippoBegImg.setX(random.nextInt(width - shippoImgSize));
+                    shippoBegImg.setY(random.nextInt(height - shippoImgSize));
                     shippoBegImg.setX(-shippoBegImg.getWidth());
                     int speed = 20;
                     int fpms = 30; // frames per milliseconds.
@@ -167,12 +146,5 @@ public class MainActivity extends AppCompatActivity {
         if (!shippoThread.isAlive()) {
             shippoThread.start();
         }
-    }
-
-    /*
-    Function that hides shippo off screen
-     */
-    void hideShippo() {
-
     }
 }
