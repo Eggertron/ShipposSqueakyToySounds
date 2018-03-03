@@ -69,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
         robinToyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopPlayer();
-                showShippo();
-                mp = MediaPlayer.create(context, R.raw.bird_whistle);
+                startPlayer(R.raw.bird_whistle);
             }
         });
 
@@ -79,9 +77,7 @@ public class MainActivity extends AppCompatActivity {
         boneToyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopPlayer();
-                showShippo();
-                mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_01);
+                startPlayer(R.raw.squeaky_toy_sound_01);
             }
         });
 
@@ -89,11 +85,16 @@ public class MainActivity extends AppCompatActivity {
         squeakerToyImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopPlayer();
-                showShippo();
-                mp = MediaPlayer.create(context, R.raw.squeaky_toy_sound_02);
+                startPlayer(R.raw.squeaky_toy_sound_02);
             }
         });
+    }
+
+    void startPlayer(int sound) {
+        stopPlayer();
+        showShippo();
+        mp = MediaPlayer.create(context, sound);
+        mp.start();
     }
 
     void stopPlayer() {
