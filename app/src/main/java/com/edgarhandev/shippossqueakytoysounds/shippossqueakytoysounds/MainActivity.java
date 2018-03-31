@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     DisplayMetrics displayMetrics = new DisplayMetrics();
     int width, height, shippoImgSize;
     Random random;
-    Thread shippoThread;
+    boolean isShippoRunning;
     private AdView mAdView;
 
 
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mp = MediaPlayer.create(this, R.raw.bird_whistle);
 
         random = new Random();
+        isShippoRunning = false;
 
         // move shippo image outside of screen
         shippoBegImg = findViewById(R.id.shippo_beg);
@@ -131,8 +132,9 @@ public class MainActivity extends AppCompatActivity {
                  */
     void showShippo() {
 
-        if (shippoThread == null)
-            shippoThread = new Thread(new Runnable() {
+        if (!isShippoRunning) {
+            isShippoRunning = true;
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     //shippoBegImg.setX(random.nextInt(width - shippoImgSize));
@@ -159,11 +161,9 @@ public class MainActivity extends AppCompatActivity {
                             shippoBegImg.setX(shippoBegImg.getX() - speed);
                         SystemClock.sleep(fpms);
                     }
+                    isShippoRunning = false;
                 }
-            });
-
-        if (!shippoThread.isAlive()) {
-            shippoThread.start();
+            }).start();
         }
     }
 }
